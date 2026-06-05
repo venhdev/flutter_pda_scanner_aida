@@ -1,3 +1,10 @@
+## 1.0.1
+
+* **Fix:** Completed the Built-in Kotlin migration that 0.0.10 only claimed on paper. The previous `build.gradle` (Groovy) still carried a legacy `if (agpMajor < 9) { apply plugin: 'kotlin-android' }` guard, so AGP 9 hosts silently skipped Kotlin compilation and produced an empty `classes.jar` (only `R.class`), breaking the host app at `GeneratedPluginRegistrant.java:44`. This release rewrites the Android module to Kotlin DSL (`build.gradle.kts`) matching the current Flutter plugin template: top-level `kotlin { compilerOptions }` block, `buildscript` classpath for AGP 9.0.1 / Kotlin 2.3.20, `namespace` set in the build script, and `compileSdk` bumped from 34 to 36.
+* **AndroidManifest:** Added `package="com.rirong.flutter_pda_scanner_aida"` to match the current template (deprecated by AGP 9 in favor of `namespace` in the build script, but kept for compatibility).
+* **minSdk:** Unchanged at 19 (lower than the template default of 24, required for older AIDA PDA hardware).
+* **pubspec:** Bumped Dart minimum to `^3.12.1` and Flutter minimum to `'>=3.3.0'` to align with the current Flutter plugin template.
+
 ## 1.0.0
 
 * **Renamed:** `flutter_pda_scanner_v2` → `flutter_pda_scanner_aida`.
