@@ -1,9 +1,13 @@
-group 'com.rirong.flutter_pda_scanner_aida'
-version '1.0-SNAPSHOT'
-
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    id "com.android.library"
+}
+
+// Flutter 3.44+ / AGP 9+ ships KGP via Built-in Kotlin — the consumer (the
+// app's settings.gradle.kts) is the sole applier. For older AGP we still
+// need to apply the plugin ourselves.
+def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0] as int
+if (agpMajor < 9) {
+    apply plugin: "org.jetbrains.kotlin.android"
 }
 
 repositories {
@@ -21,10 +25,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = '17'
     }
 
     sourceSets {
@@ -53,3 +53,15 @@ android {
         }
     }
 }
+
+// New KGP 2.0+ DSL — replaces the legacy android.kotlinOptions { … } block.
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+    }
+}
+
+// Library publication metadata. Kept for future Maven publication, but moved
+// AFTER plugins { } because Gradle 9 disallows other statements before it.
+group 'com.rirong.flutter_pda_scanner_aida'
+version '1.0-SNAPSHOT'
