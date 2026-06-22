@@ -14,7 +14,7 @@ decoded barcode to your Dart code via an `EventChannel`.
 
 ```yaml
 dependencies:
-  flutter_pda_scanner_aida: ^1.0.0
+  flutter_pda_scanner_aida: ^1.0.1
 ```
 
 For development against a local checkout:

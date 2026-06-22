@@ -1,6 +1,6 @@
 name: flutter_pda_scanner_aida
 description: "Flutter plugin for AIDA PDA handheld scanner devices. Android-only."
-version: 1.0.0
+version: 1.0.1
 
 environment:
   sdk: ^3.12.1
